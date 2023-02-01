@@ -31,8 +31,10 @@ private ArticoloDTO update(ArticoloDTO articoloDTO){
     private void delete(Long id){
         articoloRepository.deleteById(id);
     }
-    private ArticoloDTO insert(){
-        return null;
+    //TODO
+    private ArticoloDTO insert(ArticoloDTO articoloDTO){
+        Articolo newArticolo = articoloMapper.toEntity(articoloDTO);
+        return articoloMapper.toDto(articoloRepository.save(newArticolo));
     }
 
     private List<ArticoloDTO> getAll(List<ArticoloDTO>articoloDTOS){
