@@ -2,6 +2,7 @@ package it.contrader.blog.service;
 
 import it.contrader.blog.dao.ArticoloRepository;
 import it.contrader.blog.dto.ArticoloDTO;
+import it.contrader.blog.entity.Articolo;
 import it.contrader.blog.mapper.ArticoloMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,9 +24,15 @@ public class ArticoloService {
         }
         return articoloDTO;
     }
-
+private ArticoloDTO update(ArticoloDTO articoloDTO){
+        Articolo newArticolo = articoloMapper.toEntity(articoloDTO);
+        return articoloMapper.toDto(articoloRepository.save(newArticolo));
+}
     private void delete(Long id){
         articoloRepository.deleteById(id);
+    }
+    private ArticoloDTO insert(){
+        return null;
     }
 
     private List<ArticoloDTO> getAll(List<ArticoloDTO>articoloDTOS){
