@@ -15,11 +15,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long idUser;
-
     @Column(unique = true)
     public String username;
     public String usertype;
     public String password;
     public int eta;
-    public Long dataInserimento;
+    public Long userID;
+
 }

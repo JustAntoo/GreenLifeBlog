@@ -23,16 +23,21 @@ return userMapper.toDto(userRepository.findByUsernameAndPassword(username,passwo
 public UserDTO insert(UserDTO userDTO){
     return userMapper.toDto(userRepository.save(userMapper.toEntity(userDTO)));
 }
-public List<UserDTO> getAll(List<UserDTO> userDTOS){
+public List<UserDTO> getAll(){
     return userMapper.toDtoList(userRepository.findAll());
 }
 
 public UserDTO read(Long id){
     return userMapper.toDto(userRepository.findById(id).get());
 }
-public UserDTO update(UserDTO userDTO) {
-    User newUser = userMapper.toEntity(userDTO);
-    return userMapper.toDto(userRepository.save(newUser));
+public UserDTO update(Long id, UserDTO userDTO) throws Exception {
+    if (userDTO.idUser == id){
+        User newUser = userMapper.toEntity(userDTO);
+        return userMapper.toDto(userRepository.save(newUser));
+    }
+    else {
+        throw new Exception("utente non trovato");
+    }
 }
 public void delete(Long id){
     userRepository.deleteById(id);

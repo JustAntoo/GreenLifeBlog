@@ -17,27 +17,29 @@ public class ArticoloService {
     @Autowired
     private ArticoloRepository articoloRepository;
 
-    private ArticoloDTO read(String nomeArticolo) throws Exception {
+    public ArticoloDTO read(String nomeArticolo) throws Exception {
         ArticoloDTO articoloDTO = articoloMapper.toDto(articoloRepository.findByNomeArticolo(nomeArticolo));
         if (articoloDTO == null){
             throw new Exception("Articolo non trovato");
         }
         return articoloDTO;
     }
-private ArticoloDTO update(ArticoloDTO articoloDTO){
-        Articolo newArticolo = articoloMapper.toEntity(articoloDTO);
-        return articoloMapper.toDto(articoloRepository.save(newArticolo));
-}
-    private void delete(Long id){
+    public ArticoloDTO update(ArticoloDTO articoloDTO){
+            Articolo newArticolo = articoloMapper.toEntity(articoloDTO);
+            return articoloMapper.toDto(articoloRepository.save(newArticolo));
+    }
+    public void delete(Long id){
         articoloRepository.deleteById(id);
     }
     //TODO
-    private ArticoloDTO insert(ArticoloDTO articoloDTO){
+    public ArticoloDTO insert(ArticoloDTO articoloDTO){
         Articolo newArticolo = articoloMapper.toEntity(articoloDTO);
         return articoloMapper.toDto(articoloRepository.save(newArticolo));
     }
 
-    private List<ArticoloDTO> getAll(List<ArticoloDTO>articoloDTOS){
+    public List<ArticoloDTO> getAll(){
         return articoloMapper.toDtoList(articoloRepository.findAll());
     }
+
+
 }
